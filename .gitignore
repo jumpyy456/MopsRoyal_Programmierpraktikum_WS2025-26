@@ -1,0 +1,15 @@
+# Covers Maven-JavaFX projects in JetBrains IDE IntelliJ
+# Used in PS2 ueb08, ueb09 and Programmierpraktikum
+# Put this file in the directory of the JavaFX-project.
+
+# Compiled stuff
+out/
+target/
+
+# Maven-project with JavaFX should exclude module files, 
+# since they will be recreated and may curse churn. 
+.idea/
+**/*.iml
+
+# MacOS metafiles
+.DS_Store
