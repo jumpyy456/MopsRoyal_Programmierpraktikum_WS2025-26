@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.StackPane?>
+
+<StackPane xmlns="http://javafx.com/javafx/20.0.1"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="gui.UserInterfaceController">
+
+    <BorderPane prefHeight="710.0" prefWidth="1450.0">
+
+        <top>
+            <MenuBar BorderPane.alignment="CENTER">
+                <Menu text="Spiel">
+                    <MenuItem onAction="#handelNewGame" text="Neues Spiel starten" />
+                    <MenuItem onAction="#handleLoadGame" text="Spielstand laden" />
+                    <MenuItem onAction="#handleSaveGame" text="Spielstand speichern" fx:id="saveMenuItem"/>
+                    <MenuItem onAction="#handelExitGame" text="Spiel beenden" />
+                </Menu>
+                <Menu text="Hilfe">
+                    <MenuItem text="Bedienungsanleitung" onAction="#handelHelpManual"/>
+                    <MenuItem text="Kombinationen"      onAction="#handelHelpCombos"/>
+                </Menu>
+            </MenuBar>
+        </top>
+
+        <!-- LINKS: Am Zug, Punkte, Nächstes Tile -->
+        <left>
+            <VBox spacing="10" prefWidth="200" BorderPane.alignment="TOP_CENTER">
+                <padding>
+                    <Insets top="20" left="10" right="10" bottom="10"/>
+                </padding>
+
+                <!-- Am Zug -->
+                <Label text="Am Zug:" style="-fx-font-weight: bold; -fx-font-size: 16;"/>
+                <Label fx:id="activePlayerLabel" text="---" style="-fx-font-size: 16;"/>
+
+                <Separator/>
+
+                <!-- Punkte -->
+                <Label text="Punkte:" style="-fx-font-weight: bold; -fx-font-size: 16;"/>
+                <VBox fx:id="scoresBox" spacing="5"/>
+
+                <Separator/>
+
+                <!-- Nächstes Tile -->
+                <Label text="Nächstes Plättchen:" style="-fx-font-weight: bold; -fx-font-size: 16;"/>
+                <ImageView fx:id="nextTileView"
+                           fitWidth="120" fitHeight="120"
+                           preserveRatio="true"
+                           style="-fx-border-color: #cccccc; -fx-border-width: 2;"/>
+            </VBox>
+        </left>
+
+        <!-- CENTER: Hauptspielfeld -->
+        <center>
+            <ScrollPane fx:id="scrollPane"
+                        BorderPane.alignment="CENTER_LEFT"
+                        hbarPolicy="NEVER"
+                        vbarPolicy="NEVER"
+                        pannable="true"
+                        prefHeight="800.0"
+                        prefWidth="1089.0"
+                        maxWidth="600.0"
+                        maxHeight="600.0">
+                <BorderPane.margin>
+                    <Insets left="40.0"/>
+                </BorderPane.margin>
+                <GridPane fx:id="gridPane"
+                          alignment="CENTER"
+                          gridLinesVisible="false"
+                          onMouseClicked="#onMouseClickedGridPane"
+                          onScroll="#onScrollWheelGridPane"
+                          prefHeight="600.0"
+                          prefWidth="600.0">
+
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                    </columnConstraints>
+
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                    </rowConstraints>
+
+                </GridPane>
+            </ScrollPane>
+        </center>
+
+        <!-- RECHTS: 2×2 Grid mit 4 Mini-Boards -->
+        <right>
+            <VBox spacing="10" prefWidth="550" BorderPane.alignment="TOP_CENTER">
+                <padding>
+                    <Insets top="20" left="10" right="10" bottom="10"/>
+                </padding>
+
+                <Label text="Spieler-Boards:" style="-fx-font-weight: bold; -fx-font-size: 16;"/>
+
+                <!-- 2×2 GridPane für Mini-Boards -->
+                <GridPane hgap="10" vgap="10">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="250" prefWidth="250"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="250" prefWidth="250"/>
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints vgrow="SOMETIMES" minHeight="250" prefHeight="250"/>
+                        <RowConstraints vgrow="SOMETIMES" minHeight="250" prefHeight="250"/>
+                    </rowConstraints>
+
+                    <!-- Mini-Board 1 (Oben Links) -->
+                    <VBox fx:id="miniBoard1Container" spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                        <Label fx:id="miniBoard1Label" text="Spieler 1" style="-fx-font-weight: bold;"/>
+                        <GridPane fx:id="miniBoard1"
+                                  prefWidth="250" prefHeight="250"
+                                  minWidth="250" minHeight="250"
+                                  maxWidth="250" maxHeight="250"
+                                  gridLinesVisible="true"
+                                  style="-fx-border-color: #0066cc; -fx-border-width: 2;">
+                            <!-- 5x5 Grid wird dynamisch befüllt -->
+                        </GridPane>
+                    </VBox>
+
+                    <!-- Mini-Board 2 (Oben Rechts) -->
+                    <VBox fx:id="miniBoard2Container" spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                        <Label fx:id="miniBoard2Label" text="Spieler 2" style="-fx-font-weight: bold;"/>
+                        <GridPane fx:id="miniBoard2"
+                                  prefWidth="250" prefHeight="250"
+                                  minWidth="250" minHeight="250"
+                                  maxWidth="250" maxHeight="250"
+                                  gridLinesVisible="true"
+                                  style="-fx-border-color: #00cc66; -fx-border-width: 2;">
+                        </GridPane>
+                    </VBox>
+
+                    <!-- Mini-Board 3 (Unten Links) -->
+                    <VBox fx:id="miniBoard3Container" spacing="5" visible="false" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                        <GridPane.margin>
+                            <Insets top="60"/>
+                        </GridPane.margin>
+                        <Label fx:id="miniBoard3Label" text="Spieler 3" style="-fx-font-weight: bold;"/>
+                        <GridPane fx:id="miniBoard3"
+                                  prefWidth="250" prefHeight="250"
+                                  minWidth="250" minHeight="250"
+                                  maxWidth="250" maxHeight="250"
+                                  gridLinesVisible="true"
+                                  style="-fx-border-color: #cc0066; -fx-border-width: 2;">
+                        </GridPane>
+                    </VBox>
+
+                    <!-- Mini-Board 4 (Unten Rechts) -->
+                    <VBox fx:id="miniBoard4Container" spacing="5" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <GridPane.margin>
+                            <Insets top="60"/>
+                        </GridPane.margin>
+                        <Label fx:id="miniBoard4Label" text="Spieler 4" style="-fx-font-weight: bold;"/>
+                        <GridPane fx:id="miniBoard4"
+                                  prefWidth="250" prefHeight="250"
+                                  minWidth="250" minHeight="250"
+                                  maxWidth="250" maxHeight="250"
+                                  gridLinesVisible="true"
+                                  style="-fx-border-color: #cccc00; -fx-border-width: 2;">
+                        </GridPane>
+                    </VBox>
+                </GridPane>
+            </VBox>
+        </right>
+
+        <bottom>
+            <VBox alignment="CENTER" spacing="20.0" BorderPane.alignment="CENTER">
+                <padding>
+                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                </padding>
+            </VBox>
+        </bottom>
+
+    </BorderPane>
+
+</StackPane>

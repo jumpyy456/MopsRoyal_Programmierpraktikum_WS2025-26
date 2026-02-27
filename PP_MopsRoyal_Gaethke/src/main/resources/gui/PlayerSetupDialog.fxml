@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ButtonType?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<DialogPane prefWidth="520" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="gui.PlayerSetupDialogController">
+
+    <content>
+        <GridPane hgap="12" vgap="8">
+            <padding>
+                <Insets bottom="16" left="16" right="16" top="16"/>
+            </padding>
+
+            <!-- Kopfzeile -->
+            <Label GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+            <Label text="Nimmt teil" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+            <Label text="Name" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+
+            <!-- Zeilen 1..4 -->
+            <Label text="Spieler 1" textFill="#050de5" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+            <CheckBox fx:id="cb1" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+            <TextField fx:id="tf1" promptText="Name" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+
+            <Label text="Spieler 2" textFill="#0e9401" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+            <CheckBox fx:id="cb2" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+            <TextField fx:id="tf2" promptText="Name" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+
+            <Label text="Spieler 3" textFill="#b51a1a" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+            <CheckBox fx:id="cb3" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+            <TextField fx:id="tf3" promptText="Name" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+
+            <Label text="Spieler 4" textFill="#bfa407" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+            <CheckBox fx:id="cb4" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+            <TextField fx:id="tf4" promptText="Name" GridPane.columnIndex="2" GridPane.rowIndex="4"/>
+            <columnConstraints>
+                <ColumnConstraints/>
+                <ColumnConstraints/>
+                <ColumnConstraints/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints/>
+                <RowConstraints/>
+                <RowConstraints/>
+                <RowConstraints/>
+                <RowConstraints/>
+            </rowConstraints>
+        </GridPane>
+    </content>
+
+    <ButtonType fx:constant="OK"/>
+    <ButtonType fx:constant="CANCEL"/>
+</DialogPane>

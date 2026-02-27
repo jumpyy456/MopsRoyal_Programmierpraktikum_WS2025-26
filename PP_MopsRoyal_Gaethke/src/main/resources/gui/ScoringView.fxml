@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+
+<VBox xmlns="http://javafx.com/javafx/20.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="gui.ScoringViewController"
+      fx:id="scoringViewRoot"
+      spacing="15"
+      style="-fx-background-color: white; -fx-border-color: #333; -fx-border-width: 2; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 10, 0, 0, 0);"
+      prefWidth="580" maxWidth="580"
+      prefHeight="700"
+      maxHeight="700">
+
+    <padding>
+        <Insets top="20" left="20" right="20" bottom="20"/>
+    </padding>
+
+    <!-- Header -->
+    <HBox alignment="CENTER_LEFT" spacing="10">
+        <Label text="Wähle ein Muster und eine umzudrehende Karte oder nehme keine Wertung vor"
+               style="-fx-font-size: 14; -fx-font-weight: bold;"
+               wrapText="true"
+               maxWidth="800"/>
+    </HBox>
+
+    <!-- Button "keine Wertung vornehmen" -->
+    <Button fx:id="skipButton"
+            text="Keine Wertung vornehmen"
+            onAction="#handleSkipScoring"
+            maxWidth="Infinity"
+            style="-fx-font-size: 13; -fx-padding: 10;"/>
+
+    <!-- ScrollPane für Kombinationen -->
+    <ScrollPane fitToWidth="true"
+                VBox.vgrow="ALWAYS"
+                style="-fx-background: white;">
+        <VBox fx:id="combinationsContainer"
+              spacing="20">
+            <!-- Kombinationen werden dynamisch hinzugefügt -->
+        </VBox>
+    </ScrollPane>
+
+</VBox>
